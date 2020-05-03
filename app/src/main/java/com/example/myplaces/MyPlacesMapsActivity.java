@@ -44,7 +44,7 @@ public class MyPlacesMapsActivity extends AppCompatActivity implements OnMapRead
 
     public static final int SHOW_MAP = 0;
     public static final int CENTER_PLACE_ON_MAP = 1;
-    public  static final int SELECT_COORDINATES = 2;
+    public  static final int SELECT_COORDINATES = 1;
 
     private int state = 0;
     private boolean selCoorsEnabled = false;
@@ -63,6 +63,7 @@ public class MyPlacesMapsActivity extends AppCompatActivity implements OnMapRead
                     String placeLat = mapBundle.getString("lat");
                     String placeLon = mapBundle.getString("lon");
                     placeLoc = new LatLng(Double.parseDouble(placeLat), Double.parseDouble(placeLon));
+                    //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLoc, 15));
                 }
             }
         } catch (Exception e) {
