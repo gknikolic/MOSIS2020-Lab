@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyPlacesList extends AppCompatActivity {
 
@@ -66,6 +67,8 @@ public class MyPlacesList extends AppCompatActivity {
                 contextMenu.setHeaderTitle(place.getName());
                 contextMenu.add(0,1,1, "View place");
                 contextMenu.add(0,2,2, "Edit place");
+                contextMenu.add(0,3,3,"Delete place");
+                contextMenu.add(0,4,4, "Show on map");
             }
         });
     }
@@ -86,7 +89,24 @@ public class MyPlacesList extends AppCompatActivity {
             i.putExtras(positionBundle);
             startActivityForResult(i, 1);
         }
+        else if(item.getItemId() == 3) {
+            MyPlacesData.getInstance().deletePlace(info.position);
+            setList();
+        }
+        else if(item.getItemId() == 4) {
+            i = new Intent(this, MyPlacesMapsActivity.class);
+            i.putExtra("state", MyPlacesMapsActivity.CENTER_PLACE_ON_MAP);
+            MyPlace place = MyPlacesData.getInstance().getPlace(info.position);
+            i.putExtra("lat", place.getLatitude());
+            i.putExtra("lon", place.getLongitude());
+            startActivityForResult(i, 2);
+        }
         return super.onContextItemSelected(item);
+    }
+
+    private void setList() {
+        ListView myPlaceList = (ListView) findViewById(R.id.my_places_list);
+        myPlaceList.setAdapter(new ArrayAdapter<MyPlace>(this, android.R.layout.simple_list_item_1, MyPlacesData.getInstance().getMyPlaces()));
     }
 
     @Override
@@ -107,7 +127,9 @@ public class MyPlacesList extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.show_map_item) {
-            Toast.makeText(this, "Show Map!", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this,MyPlacesMapsActivity.class);
+            i.putExtra("state", MyPlacesMapsActivity.SHOW_MAP);
+            startActivity(i);
         } else if (id == R.id.new_places_item) {
             Intent i = new Intent(this, EditMyPlaceActivity.class);
             startActivityForResult(i, NEW_PLACE);
