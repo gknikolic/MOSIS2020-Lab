@@ -44,7 +44,7 @@ public class MyPlacesMapsActivity extends AppCompatActivity implements OnMapRead
 
     public static final int SHOW_MAP = 0;
     public static final int CENTER_PLACE_ON_MAP = 1;
-    public  static final int SELECT_COORDINATES = 2;
+    public  static final int SELECT_COORDINATES = 1;
 
     private int state = 0;
     private boolean selCoorsEnabled = false;
@@ -160,7 +160,7 @@ public class MyPlacesMapsActivity extends AppCompatActivity implements OnMapRead
         } else {
             if(state == SHOW_MAP) {
                 mMap.setMyLocationEnabled(true); //Permission has already been granted
-            } else if(state == SELECT_COORDINATES) {
+            } else if(state == CENTER_PLACE_ON_MAP) {
                 setOnMapClickListener();
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLoc, 15));
             }
