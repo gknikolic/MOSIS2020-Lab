@@ -71,6 +71,8 @@ public class MyPlacesList extends AppCompatActivity implements MyPlacesData.List
                 contextMenu.add(0,4,4, "Show on map");
             }
         });
+
+        MyPlacesData.getInstance().setEventListener(this);
     }
 
     @Override
@@ -155,6 +157,6 @@ public class MyPlacesList extends AppCompatActivity implements MyPlacesData.List
 
     @Override
     public void onListUpdated() {
-
+        setList();
     }
 }

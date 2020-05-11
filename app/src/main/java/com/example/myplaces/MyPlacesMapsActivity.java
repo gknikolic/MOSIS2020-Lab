@@ -162,6 +162,7 @@ public class MyPlacesMapsActivity extends AppCompatActivity implements OnMapRead
                 mMap.setMyLocationEnabled(true); //Permission has already been granted
             } else if(state == CENTER_PLACE_ON_MAP) {
                 setOnMapClickListener();
+                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLoc, 15));
             }
             else {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLoc, 15));
@@ -221,6 +222,7 @@ public class MyPlacesMapsActivity extends AppCompatActivity implements OnMapRead
                     }
                     else if(state == CENTER_PLACE_ON_MAP) {
                         setOnMapClickListener();
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLoc, 15));
                     }
                     else {
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLoc, 15));
